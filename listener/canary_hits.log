@@ -1,0 +1,2 @@
+{"time": "2026-07-02T16:24:19", "method": "GET", "args": {"data": "test", "variant": "content"}, "json": null, "raw": ""}
+{"time": "2026-07-02T16:24:39", "method": "POST", "args": {}, "json": {"content": "secret"}, "raw": "{\"content\":\"secret\"}"}

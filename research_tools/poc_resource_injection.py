@@ -24,8 +24,8 @@ from fastmcp import Client
 from server.server_notes import mcp  # reuse the server we already built
 
 # --- sentinels / fake data (all harmless) ---------------------------------
-CANARY = "CANARY_EXFIL_7f3a"                 # if this shows up downstream, "leak" succeeded
-FAKE_SECRET_NOTE = "api-credentials"         # pretend-sensitive note
+CANARY = "CANARY_EXFIL_7f3a"  # if this shows up downstream, "leak" succeeded
+FAKE_SECRET_NOTE = "api-credentials"  # pretend-sensitive note
 FAKE_SECRET_VALUE = "FAKE-KEY-1234-DO-NOT-USE"
 
 # A hidden instruction planted inside ORDINARY note content.
@@ -70,9 +70,13 @@ async def main() -> None:
         served_text = contents[0].text
         print(served_text)
         print()
-        hidden_instruction_present = ("get_note" in served_text) and (CANARY in served_text)
-        print(f"[RESULT] hidden instruction reached the client verbatim: "
-              f"{hidden_instruction_present}")
+        hidden_instruction_present = ("get_note" in served_text) and (
+            CANARY in served_text
+        )
+        print(
+            f"[RESULT] hidden instruction reached the client verbatim: "
+            f"{hidden_instruction_present}"
+        )
         print()
 
         # ---------------- DEMO 2: metadata channel ----------------
