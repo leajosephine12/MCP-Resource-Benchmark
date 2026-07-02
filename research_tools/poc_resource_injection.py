@@ -21,7 +21,7 @@ Requires: the same env as your tests (fastmcp installed, server_notes.py importa
 
 import asyncio
 from fastmcp import Client
-from server_notes import mcp  # reuse the server we already built
+from server.server_notes import mcp  # reuse the server we already built
 
 # --- sentinels / fake data (all harmless) ---------------------------------
 CANARY = "CANARY_EXFIL_7f3a"                 # if this shows up downstream, "leak" succeeded
