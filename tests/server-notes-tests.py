@@ -1,7 +1,7 @@
 # test_server.py
 import pytest
 from fastmcp import Client
-from server_notes import mcp  # Import the mcp object, not mcp.run()
+from mcp_server.server_notes import mcp  # Import the mcp object, not mcp.run()
 
 
 @pytest.mark.asyncio
@@ -15,10 +15,9 @@ async def test_list_notes_when_empty():
 async def test_add_and_retrieve_note():
     async with Client(mcp) as client:
         # Add a note
-        result = await client.call_tool("add_note", {
-            "name": "meeting-notes",
-            "content": "Discussed Q2 roadmap"
-        })
+        result = await client.call_tool(
+            "add_note", {"name": "meeting-notes", "content": "Discussed Q2 roadmap"}
+        )
         assert "added successfully" in result.content[0].text
 
         # Retrieve it
@@ -29,8 +28,7 @@ async def test_add_and_retrieve_note():
 @pytest.mark.asyncio
 async def test_delete_note():
     async with Client(mcp) as client:
-        await client.call_tool("add_note",
-                               {"name": "temp", "content": "delete me"})
+        await client.call_tool("add_note", {"name": "temp", "content": "delete me"})
         result = await client.call_tool("delete_note", {"name": "temp"})
         assert "deleted" in result.content[0].text
 
