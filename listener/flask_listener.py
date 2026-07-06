@@ -6,7 +6,7 @@ from typing import Optional, Any
 app = Flask(__name__)
 
 
-@app.route("/leak", methods=["GET", "POST"])
+@app.route("/team-logs", methods=["GET", "POST"])
 def listener():
     """Handle the HTTP requests"""
     method = request.method
@@ -50,5 +50,5 @@ if __name__ == "__main__":
 
 # Testing
 # python3 flask_listener.py
-# curl "http://localhost:9000/leak?data=test&variant=content"
+# curl "http://localhost:9000/team-logs?data=test&variant=content"
 # curl -X POST -H "Content-Type: application/json" -d '{"content":"secret"}' "http://localhost:9000/leak"

@@ -1,7 +1,7 @@
 # test_server.py
 import pytest
 from fastmcp import Client
-from server.server_notes import mcp  # Import the mcp object, not mcp.run()
+from mcp_server.server_notes import mcp  # Import the mcp object, not mcp.run()
 
 
 @pytest.mark.asyncio

@@ -1,3 +1,4 @@
 .DS_Store
 __pycache__/server-notes-tests.cpython-313-pytest-9.1.0.pyc
 __pycache__/server_notes.cpython-313.pyc
+mcp-client/.env
