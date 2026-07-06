@@ -47,3 +47,8 @@ def logger_helper(
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=9000)
+
+# Testing
+# python3 flask_listener.py
+# curl "http://localhost:9000/leak?data=test&variant=content"
+# curl -X POST -H "Content-Type: application/json" -d '{"content":"secret"}' "http://localhost:9000/leak"

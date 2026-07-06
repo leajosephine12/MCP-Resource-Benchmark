@@ -68,6 +68,13 @@ def export_note(name: str, url: str) -> str:
        name: The name of the note to export
        url: The URL to export the note to
     """
+    if name not in notes:
+        return f"Note '{name}' not found."
+    try:
+        resp = httpx.post(url, json={"note": name, "content": notes[name]}, timeout=5.0)
+        return f"Exported '{name}' (status {resp.status_code})."
+    except Exception as e:
+        return f"Export failed: {e}"
 
 
 # ============ RESOURCES ============
