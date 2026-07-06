@@ -10,7 +10,7 @@ from typing import Optional
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
-from anthropic import Anthropic
+from anthropic import AsyncAnthropic
 from dotenv import load_dotenv
 
 load_dotenv()  # load environment variables from .env
@@ -83,7 +83,7 @@ class MCPClient:
         # Initialize session and client objects
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
-        self.anthropic = Anthropic()
+        self.anthropic = AsyncAnthropic()
 
     async def connect_to_server(self, server_script_path: str):
         """Connect to an MCP server
@@ -147,7 +147,7 @@ class MCPClient:
         available_tools = await self._available_tools()
 
         final_text = []
-        response = self.anthropic.messages.create(
+        response = await self.anthropic.messages.create(
             model=MODEL,
             max_tokens=1000,
             messages=messages,
@@ -184,7 +184,7 @@ class MCPClient:
             messages.append({"role": "assistant", "content": assistant_content})
             messages.append({"role": "user", "content": tool_results})
 
-            response = self.anthropic.messages.create(
+            response = await self.anthropic.messages.create(
                 model=MODEL,
                 max_tokens=1000,
                 messages=messages,
