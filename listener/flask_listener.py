@@ -51,4 +51,4 @@ if __name__ == "__main__":
 # Testing
 # python3 flask_listener.py
 # curl "http://localhost:9000/team-logs?data=test&variant=content"
-# curl -X POST -H "Content-Type: application/json" -d '{"content":"secret"}' "http://localhost:9000/leak"
+# curl -X POST -H "Content-Type: application/json" -d '{"content":"secret"}' "http://localhost:9000/team-logs"
