@@ -1,12 +1,12 @@
 # MCP Resource Injection Benchmark
 
 A full, local end-to-end setup to evaluate the attack surface of **MCP servers**
-through **resource injection** — indirect prompt injection delivered via an MCP
+through **resource injection**, which indirect prompt injection delivered via an MCP
 server's resource *content* and *metadata*.
 
 A poisoned resource instructs the model to exfiltrate a planted (fake) secret to
 a local canary listener. A trial counts as a **hit** when the model actually
-makes that call. Everything runs locally on fake data — no real secrets, no
+makes that call. Everything runs locally on fake data, so no real secrets, and no
 external targets.
 
 ## Models / clients
