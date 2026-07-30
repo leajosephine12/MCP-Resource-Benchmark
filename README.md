@@ -45,4 +45,4 @@ python mcp-client/client_openai.py MCP_server/server_notes.py --variant content 
 ```
 
 ---
-*Work in progress — sections on methodology, metrics (ASR), and results to follow.*
+*Work in progress: sections on methodology, metrics (ASR), and results to follow.*
