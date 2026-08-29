@@ -1,3 +1,11 @@
+def _parse_cases(spec: str) -> list[int]:
+    """Parse a --cases spec like '1-10' or '1,6,7' into a list of case numbers."""
+    if "-" in spec:
+        lo, hi = spec.split("-", 1)
+        return list(range(int(lo), int(hi) + 1))
+    return [int(x) for x in spec.split(",") if x.strip()]
+
+
 # Test cases 1-10 from research_tools/test_cases.txt (content variant).
 TEST_CASES = {
     1: {

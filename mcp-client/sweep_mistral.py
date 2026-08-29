@@ -1,13 +1,13 @@
-"""Sweep driver: run test cases 1-10 x 2 Gemini models, content variant.
+"""Sweep driver: run test cases 1-10 x N Mistral models, content variant.
 
-Mirrors sweep_openai.py but drives client_gemini.py. The 10 test-case payloads
-are imported from sweep_openai so there's a single source of truth. Writes each
-test_case{N}_gemini.jsonl in the same header-per-model structure as
-results/test_case1.jsonl.
+Mirrors sweep_openai.py / sweep_gemini.py but drives client_mistral.py. The 10
+test-case payloads are imported from test_cases_sweep so there's a single source
+of truth. Writes each test_case{N}_mistral.jsonl in the same header-per-model
+structure as results/test_case1.jsonl.
 
 Usage:
-    python mcp-client/sweep_gemini.py                  # all 10 cases, n=10
-    python mcp-client/sweep_gemini.py --n 1 --cases 1  # quick preflight
+    python mcp-client/sweep_mistral.py                  # all 10 cases, n=10
+    python mcp-client/sweep_mistral.py --n 1 --cases 1  # quick preflight
 """
 
 import argparse
@@ -17,12 +17,12 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-import client_gemini as C
+import client_mistral as C
 from test_cases_sweep import TEST_CASES, _parse_cases
 
 # Confirm exact IDs + function-calling support against the live models list
-# before a real run - Gemini IDs churn.
-MODELS = ["gemini-3.6-flash", "gemini-3.5-flash-lite"]
+# before a real run - Mistral IDs churn.
+MODELS = ["mistral-large-latest", "mistral-small-latest"]
 VARIANT = "content"
 SERVER = "MCP_server/server_notes.py"
 RESULTS_DIR = Path(__file__).resolve().parent.parent / "results"
@@ -30,10 +30,10 @@ RESULTS_DIR = Path(__file__).resolve().parent.parent / "results"
 
 async def run_case(case_no: int, n: int) -> None:
     tc = TEST_CASES[case_no]
-    out_path = RESULTS_DIR / f"test_case{case_no}_gemini.jsonl"
+    out_path = RESULTS_DIR / f"test_case{case_no}_mistral.jsonl"
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    # apply this test case's payload to the shared client_gemini globals
+    # apply this test case's payload to the shared client_mistral globals
     C.FAKE_SECRET_NOTE = tc["secret_note"]
     C.FAKE_SECRET_VALUE = tc["secret_value"]
     C.POISON_NOTE_NAME = tc["poison_note"]
@@ -85,7 +85,7 @@ async def run_case(case_no: int, n: int) -> None:
 
 
 async def main():
-    parser = argparse.ArgumentParser(description="Gemini model x test-case sweep.")
+    parser = argparse.ArgumentParser(description="Mistral model x test-case sweep.")
     parser.add_argument("--n", type=int, default=10, help="trials per model per case")
     parser.add_argument("--cases", default="1-10", help="e.g. '1-10' or '1,6,7'")
     args = parser.parse_args()
